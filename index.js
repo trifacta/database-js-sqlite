@@ -1,8 +1,16 @@
-var sqlite = require('sql.js');
 var debug = require('debug')('database-js-sqlite');
+function findPackage(package) {
+    try {
+        return require(package);
+    } catch {
+        debug(`${package} not found.`);
+    }
+}
+
+var sqlite = findPackage('sql.js');
 const fs = require('fs');
 
-var sqlite3 = require('sqlite3');
+var sqlite3 = findPackage('sqlite3');
 const Common = require('database-js-common');
 
 var m_database = Symbol('database');
